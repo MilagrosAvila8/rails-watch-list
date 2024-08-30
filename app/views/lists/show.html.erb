@@ -1,0 +1,14 @@
+<h1><%= @list.name.capitalize %></h1>
+
+<h3>Bookmarks asociados:</h3>
+<% @list.movies.each do |movie| %>
+  <% bookmark=Bookmark.find_by(list: @list, movie: movie) %>
+  <%=  movie.title %>
+  <%= link_to "Eliminar bookmark", bookmark_path(bookmark),
+  data:{turbo_method: :delete,turbo_confirm:"are you sure?"}
+  %>
+<% end %>
+
+
+<%= link_to "Volver a Listas", lists_path %>
+<%= link_to "crear nuevo bookmark", new_list_bookmark_path(@list) %>
